@@ -9,7 +9,8 @@
     <category>
       <pattern>MY NAME IS *</pattern>
       <template>
-          Hey <star/>! Are you seeking career advice?
+          <think><set name="username"><star/></set></think>
+          Hey <formal><get name="username"/></formal>! Are you seeking career advice?
       </template>
   </category>
 <!-- Ask if the user is majoring in computer science -->
@@ -29,7 +30,7 @@
       </template>
       
   </category>
- <!-- The user is computer science major-->
+ <!-- The user is computer science major, ask about if he/she is intereseted in programming or networking-->
  <category>
      <pattern>CSMAJOR</pattern>
      <template>
@@ -39,13 +40,10 @@
              <postback>ASKMATH</postback>
          </button>
          <button>
-             <text>Cybersecurity</text>
+             <text>Networking</text>
              <postback>SECURITY</postback>
          </button>
-         <button>
-             <text>Business and IT</text>
-             <postback>BUSINESS</postback>
-         </button>
+        
      </template>
  </category>
  
@@ -53,7 +51,7 @@
  <category>
      <pattern>ASKMATH</pattern>
      <template>
-         Is math one of your strongest skills?
+         Is math one of your favorite subjects?
          <button>
              <text>Yes</text>
              <postback>DATAS</postback>
@@ -65,46 +63,27 @@
      </template>
  </category>
  
- <!--Show jobs related to programming-->
+ <!--The user doesnt like math, ask about web-based apps or mobile apps.-->
  <category>
      <pattern>CODING</pattern>
      <template>
-         <carousel>
-             <card>
-                 <image>https://previews.123rf.com/images/djvstock/djvstock1511/djvstock151101898/48229587-web-developer-concept-with-technology-icons-design-vector-illustration-10-eps-graphic.jpg</image>
-                 <title>Web Developer</title>
-                 <subtitle>These tech professional build, maintain and design websites.</subtitle>
-                 <button>
-                     <text>Learn more...</text>
-                     <url>https://www.rasmussen.edu/degrees/technology/blog/everything-about-becoming-web-developer/</url>
-                 </button>
-                 <button>
-                     <text>I'm interested in</text>
-                     <postback>FINDMATCH</postback>
-                 </button>
-             </card>
-             <card>
-                 <image>https://i.pinimg.com/originals/3d/72/98/3d7298d86eca5f461c969581c1a9af31.png</image>
-                 <title>Software engineer</title>
-                 <subtitle>They are responsible for designing computer or mobile applications. </subtitle>
-                 <button>
-                     <text>Learn more...</text>
-                     <url>https://www.itcareerfinder.com/it-careers/software-engineer.html</url>
-                 </button>
-                 <button>
-                     <text>I'm interested in</text>
-                     <postback>FINDMATCH</postback>
-                 </button>
-             </card>
-
-         </carousel>
-
+         What would you prefer to develop?
+         <reply>
+             <text>Web pages and web-based applications</text>
+             <postback>WEBDEV</postback>
+         </reply>
+         <reply>
+             <text>Computer systems and applications</text>
+             <postback>SOFTWARE</postback>
+         </reply>
+       
      </template>
  </category>
- 
+ <!--Data scientist-->
  <category>
      <pattern>DATAS</pattern>
      <template>
+         You should look into becoming a:
           <card>
                 <image>https://dv-website.s3.amazonaws.com/uploads/2019/10/mk_datascientist_2019.jpg</image>
                 <title>Database Scientist</title>
@@ -114,40 +93,78 @@
                     <url>https://www.itcareerfinder.com/it-careers/big-data-scientist.html</url>
                 </button>
                 <button>
-                     <text>I'm interested in</text>
+                     <text>I'm interested in it</text>
                      <postback>FINDMATCH</postback>
                  </button>
             </card>
      </template>
  </category>
- 
- <!--Show jobs related to business -->
+ <!--web developer-->
  <category>
-     <pattern>BUSINESS</pattern>
+     <pattern>WEBDEV</pattern>
      <template>
-        <card>
-            <image>https://st3.depositphotos.com/30104182/33466/v/1600/depositphotos_334668006-stock-illustration-computer-systems-analyst-outline-vector.jpg</image>
-            <title>
-                Computer System Analyst
-            </title>
-            <subtitle>They are responsible for merging business needs with IT initiatives.</subtitle>
+         You should look into becoming a:
+         <card>
+            <image>https://previews.123rf.com/images/djvstock/djvstock1511/djvstock151101898/48229587-web-developer-concept-with-technology-icons-design-vector-illustration-10-eps-graphic.jpg</image>
+            <title>Web Developer</title>
+            <subtitle>These tech professional build, maintain and design websites.</subtitle>
             <button>
-                 <text>Learn more...</text>
-                <url>https://www.rasmussen.edu/degrees/technology/blog/what-is-computer-systems-analyst/</url>
+                <text>Learn more...</text>
+                <url>https://www.rasmussen.edu/degrees/technology/blog/everything-about-becoming-web-developer/</url>
             </button>
             <button>
-                     <text>I'm interested in</text>
-                     <postback>FINDMATCH</postback>
-                 </button>
+                <text>I'm interested in it!</text>
+                <postback>FINDMATCH</postback>
+            </button>
         </card>
      </template>
  </category>
+ <!-- software engineer-->
+ <category>
+     <pattern>SOFTWARE</pattern>
+     <template>
+         <formal><get name="username"/></formal>, I have found a career for you! 
+        <card>
+            <image>https://i.pinimg.com/originals/3d/72/98/3d7298d86eca5f461c969581c1a9af31.png</image>
+            <title>Software engineer</title>
+            <subtitle>They are responsible for designing computer or mobile applications. </subtitle>
+            <button>
+                <text>Learn more...</text>
+                <url>https://www.itcareerfinder.com/it-careers/software-engineer.html</url>
+            </button>
+            <button>
+                <text>I'm interested in it!</text>
+                <postback>FINDMATCH</postback>
+            </button>
+        </card> 
+         
+     </template>
+ </category>
  
- <!--Ask about their data -->
+ 
+ <!--User selected networking-->
   <category>
      <pattern>SECURITY</pattern>
      <template>
-         <card>
+         Do you have a strong interest in Cybersecurity?
+         <reply>
+             <text>Yes</text>
+             <postback>YCYBER</postback>
+         </reply>
+         <reply>
+             <text>No</text>
+             <postback>BUSINESS</postback>
+         </reply>
+        
+    
+     </template>
+ </category>
+ 
+ <category>
+     <pattern>YCYBER</pattern>
+     <template>
+        <formal><get name="username"/></formal>, I have found a career for you! You should look into becoming a 
+        <card>
             <image>https://cyberation.io/images/cyber-watch.png</image>
             <title>Information Security Analyst</title>
             <subtitle>Their duty is to keep their organization's network and information safe and minimizing damage in the event of a security breach.</subtitle>
@@ -162,9 +179,36 @@
                  <postback>FINDMATCH</postback>
             </button>
         </card>
-    
+         
      </template>
  </category>
+ 
+
+ <!--Show jobs related to business -->
+ <category>
+     <pattern>BUSINESS</pattern>
+     <template>
+        <formal><get name="username"/></formal>, I think you should look into becoming a 
+         
+        <card>
+            <image>https://st3.depositphotos.com/30104182/33466/v/1600/depositphotos_334668006-stock-illustration-computer-systems-analyst-outline-vector.jpg</image>
+            <title>
+                Computer System Analyst
+            </title>
+            <subtitle>They are responsible for merging business needs with IT initiatives.</subtitle>
+            <button>
+                 <text>Learn more...</text>
+                <url>https://www.rasmussen.edu/degrees/technology/blog/what-is-computer-systems-analyst/</url>
+            </button>
+            <button>
+                <text>I'm interested in it.</text>
+                <postback>FINDMATCH</postback>
+            </button>
+        </card>
+     </template>
+ </category>
+ 
+ 
  
 <!-- The user is not computer science major-->
  <category>
@@ -188,12 +232,12 @@
 </category>
 <category>
     <pattern>NOCONTINUE</pattern>
-    <template>Thanks for using my service. Sorry I couldn't help you.</template>
+    <template>Thanks for using my service. Sorry I couldn't help you, <formal><get name="username"/></formal> 😔.</template>
 </category>
 <!--The user found a match -->
 <category>
     <pattern>FINDMATCH</pattern>
-    <template>I'm glad you found a career path. 👋Come back again! You may leave this session.</template>
+    <template>I'm glad you found a career path, <formal><get name="username"/></formal>. 👋Good luck! You may leave this session.</template>
 </category>
 
 <!--The user does not want help-->
@@ -209,17 +253,17 @@
 <!-- Leaving the session-->
 <category>
     <pattern>BYE</pattern>
-    <template>Thanks for using my service! Have a nice day.</template>
+    <template>Thanks for using my service, <formal><get name="username"/></formal>! Have a nice day.</template>
 </category>
   
 <!--Greetings and start of the service--> 
   <category>
       <pattern>HELLO</pattern>
-      <template>Hi there! Welcome to WGU chatbot Advisor. Type "start" to begin a session.</template>
+      <template>Hi there! Welcome to WGU chatbot Advisor. Type "begin" to begin a session.</template>
   </category>
 
 <category>
-      <pattern>START</pattern>
+      <pattern>BEGIN</pattern>
       <template>What is your name? Respond with: "My name is ... "</template>
   </category>
   
