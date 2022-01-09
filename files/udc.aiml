@@ -47,7 +47,7 @@
      </template>
  </category>
  
- <!-- Ask if the user likes math -->
+ <!-- User selected programming. Ask if the user likes math -->
  <category>
      <pattern>ASKMATH</pattern>
      <template>
@@ -68,18 +68,18 @@
      <pattern>CODING</pattern>
      <template>
          What would you prefer to develop?
-         <reply>
+         <button>
              <text>Web pages and web-based applications</text>
              <postback>WEBDEV</postback>
-         </reply>
-         <reply>
+         </button>
+         <button>
              <text>Computer systems and applications</text>
              <postback>SOFTWARE</postback>
-         </reply>
+         </button>
        
      </template>
  </category>
- <!--Data scientist-->
+ <!--User likes math. Data scientist -->
  <category>
      <pattern>DATAS</pattern>
      <template>
@@ -87,15 +87,13 @@
           <card>
                 <image>https://dv-website.s3.amazonaws.com/uploads/2019/10/mk_datascientist_2019.jpg</image>
                 <title>Database Scientist</title>
-                <subtitle>The use technology to mine this data for actionable intelligence.</subtitle>
+                <subtitle>They use technology to mine data for actionable intelligence.</subtitle>
                 <button>
                     <text>Learn more...</text>
                     <url>https://www.itcareerfinder.com/it-careers/big-data-scientist.html</url>
                 </button>
-                <button>
-                     <text>I'm interested in it</text>
-                     <postback>FINDMATCH</postback>
-                 </button>
+                <srai>BUTTONFINDMATCH</srai>
+                <srai>BUTTONALLOPTIONS</srai>
             </card>
      </template>
  </category>
@@ -112,10 +110,8 @@
                 <text>Learn more...</text>
                 <url>https://www.rasmussen.edu/degrees/technology/blog/everything-about-becoming-web-developer/</url>
             </button>
-            <button>
-                <text>I'm interested in it!</text>
-                <postback>FINDMATCH</postback>
-            </button>
+            <srai>BUTTONFINDMATCH</srai>
+            <srai>BUTTONALLOPTIONS</srai>
         </card>
      </template>
  </category>
@@ -132,10 +128,8 @@
                 <text>Learn more...</text>
                 <url>https://www.itcareerfinder.com/it-careers/software-engineer.html</url>
             </button>
-            <button>
-                <text>I'm interested in it!</text>
-                <postback>FINDMATCH</postback>
-            </button>
+            <srai>BUTTONFINDMATCH</srai>
+            <srai>BUTTONALLOPTIONS</srai>
         </card> 
          
      </template>
@@ -147,16 +141,14 @@
      <pattern>SECURITY</pattern>
      <template>
          Do you have a strong interest in Cybersecurity?
-         <reply>
+         <button>
              <text>Yes</text>
              <postback>YCYBER</postback>
-         </reply>
-         <reply>
+         </button>>
+         <button>
              <text>No</text>
              <postback>BUSINESS</postback>
-         </reply>
-        
-    
+         </button>
      </template>
  </category>
  
@@ -174,10 +166,8 @@
                 </text>
                 <url>https://www.rasmussen.edu/degrees/technology/blog/becoming-cyber-security-analyst/</url>
             </button>
-            <button>
-                <text>I'm interested in</text>
-                 <postback>FINDMATCH</postback>
-            </button>
+           <srai>BUTTONFINDMATCH</srai>
+           <srai>BUTTONALLOPTIONS</srai>
         </card>
          
      </template>
@@ -189,7 +179,6 @@
      <pattern>BUSINESS</pattern>
      <template>
         <formal><get name="username"/></formal>, I think you should look into becoming a 
-         
         <card>
             <image>https://st3.depositphotos.com/30104182/33466/v/1600/depositphotos_334668006-stock-illustration-computer-systems-analyst-outline-vector.jpg</image>
             <title>
@@ -200,11 +189,10 @@
                  <text>Learn more...</text>
                 <url>https://www.rasmussen.edu/degrees/technology/blog/what-is-computer-systems-analyst/</url>
             </button>
-            <button>
-                <text>I'm interested in it.</text>
-                <postback>FINDMATCH</postback>
-            </button>
+            <srai>BUTTONFINDMATCH</srai>
+            <srai>BUTTONALLOPTIONS</srai>
         </card>
+        
      </template>
  </category>
  
@@ -267,7 +255,90 @@
       <template>What is your name? Respond with: "My name is ... "</template>
   </category>
   
+<!--Button Find match-->
+<category>
+    <pattern>BUTTONFINDMATCH</pattern>
+    <template>
+        <button>
+            <text>I'm interested in it.</text>
+            <postback>FINDMATCH</postback>
+        </button>
+    </template>
+</category>
 
+<!--Review all the options-->
+<category>
+    <pattern>BUTTONALLOPTIONS</pattern>
+    <template>
+        <button>
+            <text>Review all the options</text>
+            <postback>ALLOPTIONS</postback>
+        </button>
+        
+    </template>
+</category>
+
+<category>
+    <pattern>ALLOPTIONS</pattern>
+    <template>
+        <carousel>
+            <card>
+                <image>https://dv-website.s3.amazonaws.com/uploads/2019/10/mk_datascientist_2019.jpg</image>
+                <title>Database Scientist</title>
+                <subtitle>They use technology to mine data for actionable intelligence.</subtitle>
+                <button>
+                    <text>Learn more...</text>
+                    <url>https://www.itcareerfinder.com/it-careers/big-data-scientist.html</url>
+                </button>
+                <srai>BUTTONFINDMATCH</srai>
+            </card>
+            <card>
+                <image>https://previews.123rf.com/images/djvstock/djvstock1511/djvstock151101898/48229587-web-developer-concept-with-technology-icons-design-vector-illustration-10-eps-graphic.jpg</image>
+                <title>Web Developer</title>
+                <subtitle>These tech professional build, maintain and design websites.</subtitle>
+                <button>
+                    <text>Learn more...</text>
+                    <url>https://www.rasmussen.edu/degrees/technology/blog/everything-about-becoming-web-developer/</url>
+                </button>
+                <srai>BUTTONFINDMATCH</srai>
+            </card>
+            <card>
+                <image>https://i.pinimg.com/originals/3d/72/98/3d7298d86eca5f461c969581c1a9af31.png</image>
+                <title>Software engineer</title>
+                <subtitle>They are responsible for designing computer or mobile applications. </subtitle>
+                <button>
+                    <text>Learn more...</text>
+                    <url>https://www.itcareerfinder.com/it-careers/software-engineer.html</url>
+                </button>
+                <srai>BUTTONFINDMATCH</srai>
+            </card>
+            <card>
+                <image>https://cyberation.io/images/cyber-watch.png</image>
+                <title>Information Security Analyst</title>
+                <subtitle>Their duty is to keep their organization's network and information safe and minimizing damage in the event of a security breach.</subtitle>
+                <button>
+                    <text>
+                        Learn more...
+                    </text>
+                    <url>https://www.rasmussen.edu/degrees/technology/blog/becoming-cyber-security-analyst/</url>
+                </button>
+               <srai>BUTTONFINDMATCH</srai>
+            </card>
+            <card>
+                <image>https://st3.depositphotos.com/30104182/33466/v/1600/depositphotos_334668006-stock-illustration-computer-systems-analyst-outline-vector.jpg</image>
+                <title>
+                    Computer System Analyst
+                </title>
+                <subtitle>They are responsible for merging business needs with IT initiatives.</subtitle>
+                <button>
+                     <text>Learn more...</text>
+                    <url>https://www.rasmussen.edu/degrees/technology/blog/what-is-computer-systems-analyst/</url>
+                </button>
+                <srai>BUTTONFINDMATCH</srai>
+            </card>
+        </carousel>
+    </template>
+</category>
   
  
 </aiml>
