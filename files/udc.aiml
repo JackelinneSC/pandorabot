@@ -1,7 +1,229 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml>
-  <category>
-    <pattern>*</pattern>
-    <template>I have no answer for that.</template>
+    
+ <category>
+        <pattern>*</pattern>
+        <template><srai>HELLO</srai></template>
+    </category>
+<!--Ask the user's name-->
+    <category>
+      <pattern>MY NAME IS *</pattern>
+      <template>
+          Hey <star/>! Are you seeking career advice?
+      </template>
   </category>
+<!-- Ask if the user is majoring in computer science -->
+  <category>
+      <that>_ ADVICE</that>
+      <pattern># YES #</pattern>
+      <template>
+          Great! I'm here to help you. First, let me ask you a question. What's your major?
+          <button>
+              <text>Computer Science BS</text>
+              <postback>CSMAJOR</postback>
+          </button>
+          <button>
+              <text>Non-Computer Science BS</text>
+              <postback>NONCSMAJOR</postback>
+          </button>
+      </template>
+      
+  </category>
+ <!-- The user is computer science major-->
+ <category>
+     <pattern>CSMAJOR</pattern>
+     <template>
+         Good to know! What are you interested in?
+         <button>
+             <text>Programming</text>
+             <postback>ASKMATH</postback>
+         </button>
+         <button>
+             <text>Cybersecurity</text>
+             <postback>SECURITY</postback>
+         </button>
+         <button>
+             <text>Business and IT</text>
+             <postback>BUSINESS</postback>
+         </button>
+     </template>
+ </category>
+ 
+ <!-- Ask if the user likes math -->
+ <category>
+     <pattern>ASKMATH</pattern>
+     <template>
+         Is math one of your strongest skills?
+         <button>
+             <text>Yes</text>
+             <postback>DATAS</postback>
+         </button>
+         <button>
+             <text>No</text>
+             <postback>CODING</postback>
+         </button>
+     </template>
+ </category>
+ 
+ <!--Show jobs related to programming-->
+ <category>
+     <pattern>CODING</pattern>
+     <template>
+         <carousel>
+             <card>
+                 <image>https://previews.123rf.com/images/djvstock/djvstock1511/djvstock151101898/48229587-web-developer-concept-with-technology-icons-design-vector-illustration-10-eps-graphic.jpg</image>
+                 <title>Web Developer</title>
+                 <subtitle>These tech professional build, maintain and design websites.</subtitle>
+                 <button>
+                     <text>Learn more...</text>
+                     <url>https://www.rasmussen.edu/degrees/technology/blog/everything-about-becoming-web-developer/</url>
+                 </button>
+                 <button>
+                     <text>I'm interested in</text>
+                     <postback>FINDMATCH</postback>
+                 </button>
+             </card>
+             <card>
+                 <image>https://i.pinimg.com/originals/3d/72/98/3d7298d86eca5f461c969581c1a9af31.png</image>
+                 <title>Software engineer</title>
+                 <subtitle>They are responsible for designing computer or mobile applications. </subtitle>
+                 <button>
+                     <text>Learn more...</text>
+                     <url>https://www.itcareerfinder.com/it-careers/software-engineer.html</url>
+                 </button>
+                 <button>
+                     <text>I'm interested in</text>
+                     <postback>FINDMATCH</postback>
+                 </button>
+             </card>
+
+         </carousel>
+
+     </template>
+ </category>
+ 
+ <category>
+     <pattern>DATAS</pattern>
+     <template>
+          <card>
+                <image>https://dv-website.s3.amazonaws.com/uploads/2019/10/mk_datascientist_2019.jpg</image>
+                <title>Database Scientist</title>
+                <subtitle>The use technology to mine this data for actionable intelligence.</subtitle>
+                <button>
+                    <text>Learn more...</text>
+                    <url>https://www.itcareerfinder.com/it-careers/big-data-scientist.html</url>
+                </button>
+                <button>
+                     <text>I'm interested in</text>
+                     <postback>FINDMATCH</postback>
+                 </button>
+            </card>
+     </template>
+ </category>
+ 
+ <!--Show jobs related to business -->
+ <category>
+     <pattern>BUSINESS</pattern>
+     <template>
+        <card>
+            <image>https://st3.depositphotos.com/30104182/33466/v/1600/depositphotos_334668006-stock-illustration-computer-systems-analyst-outline-vector.jpg</image>
+            <title>
+                Computer System Analyst
+            </title>
+            <subtitle>They are responsible for merging business needs with IT initiatives.</subtitle>
+            <button>
+                 <text>Learn more...</text>
+                <url>https://www.rasmussen.edu/degrees/technology/blog/what-is-computer-systems-analyst/</url>
+            </button>
+            <button>
+                     <text>I'm interested in</text>
+                     <postback>FINDMATCH</postback>
+                 </button>
+        </card>
+     </template>
+ </category>
+ 
+ <!--Ask about their data -->
+  <category>
+     <pattern>SECURITY</pattern>
+     <template>
+         <card>
+            <image>https://cyberation.io/images/cyber-watch.png</image>
+            <title>Information Security Analyst</title>
+            <subtitle>Their duty is to keep their organization's network and information safe and minimizing damage in the event of a security breach.</subtitle>
+            <button>
+                <text>
+                    Learn more...
+                </text>
+                <url>https://www.rasmussen.edu/degrees/technology/blog/becoming-cyber-security-analyst/</url>
+            </button>
+            <button>
+                <text>I'm interested in</text>
+                 <postback>FINDMATCH</postback>
+            </button>
+        </card>
+    
+     </template>
+ </category>
+ 
+<!-- The user is not computer science major-->
+ <category>
+     <pattern>NONCSMAJOR</pattern>
+     <template>
+        Unfortunely I only provide career advice to Computer Science Major students. 
+        Do you want to continue? 
+        <button>
+            <text>Yes</text>
+            <postback>YESCONTINUE</postback>
+        </button>
+        <button>
+            <text>No</text>
+            <postback>NOCONTINUE</postback>
+        </button>
+     </template>
+ </category>
+<category>
+    <pattern>YESCONTINUE</pattern>
+    <template><srai>CSMAJOR</srai></template>
+</category>
+<category>
+    <pattern>NOCONTINUE</pattern>
+    <template>Thanks for using my service. Sorry I couldn't help you.</template>
+</category>
+<!--The user found a match -->
+<category>
+    <pattern>FINDMATCH</pattern>
+    <template>I'm glad you found a career path. 👋Come back again! You may leave this session.</template>
+</category>
+
+<!--The user does not want help-->
+  <category>
+       <that>_ ADVICE</that>
+      <pattern># NO #</pattern>
+      <template>
+          <image>https://thetruthaboutplas.com/wp-content/uploads/2014/10/Homer-Doh.png</image>
+          Do'h, I'll see you next time!
+      </template>
+  </category>
+  
+<!-- Leaving the session-->
+<category>
+    <pattern>BYE</pattern>
+    <template>Thanks for using my service! Have a nice day.</template>
+</category>
+  
+<!--Greetings and start of the service--> 
+  <category>
+      <pattern>HELLO</pattern>
+      <template>Hi there! Welcome to WGU chatbot Advisor. Type "start" to begin a session.</template>
+  </category>
+
+<category>
+      <pattern>START</pattern>
+      <template>What is your name? Respond with: "My name is ... "</template>
+  </category>
+  
+
+  
+ 
 </aiml>
